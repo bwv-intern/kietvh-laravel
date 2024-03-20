@@ -8,9 +8,9 @@
 
     <div class="card card-primary card-outline">
         <div class="card-body">
-            <h5 class="text-center">Danh Mục</h5>
+            <h5 class="text-center">Sản phẩm</h5>
             <p class="card-text text-center">
-                Admin - Danh Mục
+                Admin - Sản phẩm
             </p>
         </div>
 
