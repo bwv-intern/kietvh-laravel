@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ValiadateExampleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 
 });
+
+// Route Validate Issue 126182
+Route::get('/validation',[ValiadateExampleController::class,'index']);
+
