@@ -38,7 +38,7 @@ class CategoryController extends Controller
         return view('admin.category.add');
     }
 
-    public function add(CategoryRequest $request){
+    public function add(Request $request){
         $nameCategory = $request ->nameCategory;
         $category = new Category();
         $category -> name = $nameCategory;
