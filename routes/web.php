@@ -49,4 +49,4 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 // Route Validate Issue 126182
 Route::get('/validation',[ValiadateExampleController::class,'index']);
-
+Route::post('/validation',[ValiadateExampleController::class,'validateServerSide']);

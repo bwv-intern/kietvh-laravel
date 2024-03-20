@@ -26,43 +26,61 @@
                     <div class="card-header">
                         <h3 class="card-title">Validation</h3>
                     </div>
-                    <form id="formValidateExample" name="formValidateExample" method="POST" action="">
+                    {{-- @if (session('errors'))
+                            <div class="alert alert-danger my-1">
+                                {{ session('errors') }}
+                            </div>
+                        @endif --}}
+                    <form id="formValidateExample" name="formValidateExample" method="POST" action="/validation">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputRequired">Required input</label>
                                 <input type="text" class="form-control" id="exampleInputRequired"
                                     name="requiredInput" placeholder="Enter input">
-                                <span id="exampleInputRequiredError" class="text-danger"></span>
+                                <span id="exampleInputRequiredError" class="text-danger">
+                                    {{ \App\Helpers\ErrorHelper::displayError($errors, 'requiredInput') }}
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputMaxMinLength">Max length - Min length</label>
                                 <input type="text" class="form-control" id="exampleInputMaxMinLength"
                                     name="maxMinLengthInput" placeholder="Enter input">
-                                <span id="exampleInputMaxMinLengthError" class="text-danger"></span>
+                                <span id="exampleInputMaxMinLengthError" class="text-danger">
+                                    {{ \App\Helpers\ErrorHelper::displayError($errors, 'maxMinLengthInput') }}
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail">Email</label>
                                 <input type="email" class="form-control" id="exampleInputEmail" name="emailInput"
                                     placeholder="Enter Email">
-                                <span id="exampleInputEmailError" class="text-danger"></span>
+                                <span id="exampleInputEmailError" class="text-danger">
+                                    {{ \App\Helpers\ErrorHelper::displayError($errors, 'emailInput') }}
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputDigits">Digits</label>
                                 <input type="text" class="form-control" id="exampleInputDigits" name="digitsInput"
                                     placeholder="Enter Digits">
-                                <span id="exampleInputDigitsError" class="text-danger"></span>
+                                <span id="exampleInputDigitsError" class="text-danger">
+                                    {{ \App\Helpers\ErrorHelper::displayError($errors, 'digitsInput') }}
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputNumber">Number</label>
                                 <input type="number" class="form-control" id="exampleInputNumber" name="numberInput"
                                     placeholder="Enter Number">
-                                <span id="exampleInputNumberError" class="text-danger"></span>
+                                <span id="exampleInputNumberError" class="text-danger">
+                                    {{ \App\Helpers\ErrorHelper::displayError($errors, 'numberInput') }}
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputDate">Date</label>
                                 <input type="text" class="form-control" id="exampleInputDate" name="dateInput"
                                     placeholder="Enter Date">
-                                <span id="exampleInputDateError" class="text-danger"></span>
+                                <span id="exampleInputDateError" class="text-danger">
+                                    {{ \App\Helpers\ErrorHelper::displayError($errors, 'dateInput') }}
+                                </span>
                             </div>
                             {{-- <div class="form-group">
                                 <label for="exampleInputChar">Char 1 byte, 2 -byte</label>
@@ -88,7 +106,7 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         $().ready(function() {
             // Validate date format dd/MM/yyyy
             $.validator.addMethod(
@@ -169,7 +187,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" inte
         grity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
