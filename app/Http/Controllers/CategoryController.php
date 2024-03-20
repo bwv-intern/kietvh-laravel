@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index(){
 
-        $categories = Category::all();
+        $categories = Category::simplePaginate(1);
         return view('admin.category.index',compact('categories'));
 
     }

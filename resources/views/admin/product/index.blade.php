@@ -52,11 +52,11 @@
                     @endforeach
                     </tbody>
                 </table>
+
             </div>
         </div>
-
     </div>
-
+    {{ $products->links() }}
 @endsection
 
 <script>
