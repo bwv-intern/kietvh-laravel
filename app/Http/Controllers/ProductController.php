@@ -43,7 +43,7 @@ class ProductController extends Controller
         return view('admin.product.edit', compact('product', 'categories'));
     }
 
-    public function edit(Request $request)
+    public function edit(ProductRequest $request)
     {
         $productId = $request->input('productID');
         $productName = $request->input('productName');
