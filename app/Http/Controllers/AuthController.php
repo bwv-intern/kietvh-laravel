@@ -13,10 +13,25 @@ class AuthController extends Controller
     }
 
     public function doLogin(Request $request){
-        return "doLogin";
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if(Auth::attempt($credentials))
+        {
+            $request->session()->regenerate();
+            return redirect()->route('index')
+                ->withSuccess('You have successfully logged in!');
+        }
+        return back()->withErrors([
+            'email' => 'Your provided credentials do not match in our records.',
+        ])->onlyInput('email');
+
     }
 
     public function doLogOut(){
+        Auth::logout();
         return redirect('admin');
     }
 
