@@ -18,6 +18,17 @@
                         <div class="card-header">
                             <h3 class="card-title">Thêm danh mục mới</h3>
                         </div>
+
+                        @if (session('success'))
+                            <div class="alert alert-success my-1">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('errors'))
+                            <div class="alert alert-danger my-1">
+                                {{ session('errors') }}
+                            </div>
+                        @endif
                         <form action = "/admin/category/add" id ="categoryForm" method="POST">
                             @csrf
                             <div class="card-body">
