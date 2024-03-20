@@ -108,6 +108,7 @@
     </div>
     {{-- <script>
         $().ready(function() {
+
             // Validate date format dd/MM/yyyy
             $.validator.addMethod(
                 "dateITA",
@@ -145,7 +146,8 @@
                     },
                     "digitsInput": {
                         required: true,
-                        digits: true
+                        digits: true,
+                        maxlength: 5
                     },
                     "numberInput": {
                         required: true,
@@ -174,7 +176,8 @@
                     },
                     "digitsInput": {
                         required: "Please enter digits only",
-                        digits: "Please enter a valid number"
+                        digits: "Please enter a valid number",
+                        maxlength: "Maximum length is 5 characters"
                     },
                     "numberInput": {
                         required: "Please enter a number",
