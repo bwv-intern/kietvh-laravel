@@ -36,10 +36,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 
     Route::prefix('product')->group(function () {
-        Route::get('/', [ProductController::class,'index'])->name('admin.product.index');
+        Route::get('/', [ProductController::class,'index'])->name('product.index');
         Route::get('/add', [ProductController::class,'getAdd']);
         Route::post('/add', [ProductController::class,'add']);
-        Route::get('/edit/{id}', [ProductController::class,'getEdit'])->name('admin.product.gedit');
+        Route::get('/edit/{id}', [ProductController::class,'getEdit'])->name('product.gedit');
         Route::post('/edit', [ProductController::class,'edit']);
         Route::get('/delete/{id}', [ProductController::class,'delete']);
     });
