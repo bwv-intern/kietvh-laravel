@@ -17,7 +17,7 @@ class ProductController extends Controller
     }
 
 
-    public function add(Request $request)
+    public function add(ProductRequest $request)
     {
         $product = new Product();
         $product->name = $request->input('productName');
