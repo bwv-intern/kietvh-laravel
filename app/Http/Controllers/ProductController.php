@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::simplePaginate(5);
-        return view('product.index', compact('products'));
+        return view('admin.product.index', compact('products'));
     }
 
 
@@ -33,14 +33,14 @@ class ProductController extends Controller
     public function getAdd()
     {
         $categories = Category::all();
-        return view('product.add', compact('categories'));
+        return view('admin.product.add', compact('categories'));
     }
 
     public function getEdit($id)
     {
         $product = Product::find($id);
         $categories = Category::all();
-        return view('product.edit', compact('product', 'categories'));
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     public function edit(ProductRequest $request)
