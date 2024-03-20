@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
     }
 
-    public function postEdit(Request $request){
+    public function postEdit(CategoryRequest $request){
         $idCategory = $request -> idCategory;
         $nameCategory =  $request -> nameCategory;
 
