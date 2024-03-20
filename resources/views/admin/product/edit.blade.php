@@ -24,6 +24,11 @@
                                 {{ session('success') }}
                             </div>
                         @endif
+                        @if (session('errors'))
+                            <div class="alert alert-danger my-1">
+                                {{ session('errors') }}
+                            </div>
+                        @endif
                         <form action="/admin/product/edit" id="productForm" method="POST">
                             @csrf
                             <div class="card-body">
