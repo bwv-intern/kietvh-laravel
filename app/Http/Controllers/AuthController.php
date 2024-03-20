@@ -9,7 +9,7 @@ class AuthController extends Controller
 
     public function login()
     {
-       return "Login";
+        return view('admin.auth.login');
     }
 
     public function doLogin(Request $request){
@@ -17,7 +17,7 @@ class AuthController extends Controller
     }
 
     public function doLogOut(){
-        return "doLogOut";
+        return redirect('admin');
     }
 
 
