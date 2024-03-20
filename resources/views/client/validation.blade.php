@@ -104,9 +104,16 @@
             //validate char 1byte -2 byte
             $.validator.addMethod("byteLength", function(value, element, params) {
                 var length = value.replace(/[^\x00-\xff]/g, "aa")
-                .length; // Each two-byte character is replaced by 'aa'
+                    .length; // Each two-byte character is replaced by 'aa'
                 return this.optional(element) || (length >= params[0] && length <= params[1]);
             }, "Please enter a value with byte length between 0 and 1.");
+
+
+            // Only Accept Digst Value from 0 to 100
+            $.validator.addMethod("range0to100", function(value, element) {
+                return value >= 0 && value <= 100;
+            }, "Please enter a number between 0 and 100");
+
 
             // validate form
             $("#formValidateExample").validate({
@@ -129,7 +136,7 @@
                     "digitsInput": {
                         required: true,
                         digits: true,
-                        maxlength: 5
+                        range0to100: true
                     },
                     "numberInput": {
                         required: true,
@@ -139,7 +146,7 @@
                         required: true,
                         dateITA: true
                     },
-                    "charInput":{
+                    "charInput": {
                         required: true,
                         byteLength: true
                     }
@@ -159,7 +166,7 @@
                     "digitsInput": {
                         required: "Please enter digits only",
                         digits: "Please enter a valid number",
-                        maxlength: "Maximum length is 5 characters"
+                        range0to100: "Please enter a number between 0 and 100"
                     },
                     "numberInput": {
                         required: "Please enter a number",
