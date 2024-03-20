@@ -11,13 +11,13 @@ class CategoryController extends Controller
     public function index(){
 
         $categories = Category::simplePaginate(1);
-        return view('admin.category.index',compact('categories'));
+        return view('category.index',compact('categories'));
 
     }
 
     public function getEdit($id){
         $category = Category::find($id);
-        return view('admin.category.edit',compact('category'));
+        return view('category.edit',compact('category'));
 
     }
 

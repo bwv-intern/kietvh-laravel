@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::simplePaginate(5);
-        return view('admin.product.index', compact('products'));
+        return view('product.index', compact('products'));
     }
 
 
@@ -27,20 +27,20 @@ class ProductController extends Controller
         $product->description = $request->input('productDescription');
         $product->save();
 
-        return redirect()->route('admin.product.index')->with('success', 'Thêm sản phẩm thành công!');
+        return redirect()->route('product.index')->with('success', 'Thêm sản phẩm thành công!');
     }
 
     public function getAdd()
     {
         $categories = Category::all();
-        return view('admin.product.add', compact('categories'));
+        return view('product.add', compact('categories'));
     }
 
     public function getEdit($id)
     {
         $product = Product::find($id);
         $categories = Category::all();
-        return view('admin.product.edit', compact('product', 'categories'));
+        return view('product.edit', compact('product', 'categories'));
     }
 
     public function edit(ProductRequest $request)
@@ -62,7 +62,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('admin.product.gedit', ['id' => $productId])->with('success', 'sản phẩm đã được cập nhật thành công');
+        return redirect()->route('product.gedit', ['id' => $productId])->with('success', 'sản phẩm đã được cập nhật thành công');
     }
     public function delete($id)
     {
@@ -74,6 +74,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('admin.product.index')->with('success', 'Sản phẩm đã được xóa thành công.');
+        return redirect()->route('product.index')->with('success', 'Sản phẩm đã được xóa thành công.');
     }
 }
