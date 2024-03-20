@@ -25,7 +25,7 @@ class ValidationServerRequest extends FormRequest
             'requiredInput' => 'required',
             'maxMinLengthInput' => 'required|min:8|max:20',
             'emailInput' => 'required|email',
-            'digitsInput' => 'required|digits',
+            'digitsInput' => 'required|digits:5',
             'numberInput' => 'required|numeric',
             'dateInput' => 'required|date_format:d/m/Y',
         ];
