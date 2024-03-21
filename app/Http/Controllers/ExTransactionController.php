@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ProductRequest;
 
 class ExTransactionController extends Controller
 {
-    public function store(Request $request){
+    public function store(ProductRequest $request){
         // start transaction
         DB::beginTransaction();
 
