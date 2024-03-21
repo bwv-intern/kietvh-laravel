@@ -60,7 +60,7 @@ class CategoryController extends Controller
             $category -> save();
             DB::commit();
 
-            return redirect()->route('category.gedit', ['id' => $category -> id])->with('success', 'Danh mục đã được thêm thành công');
+            return redirect()->route('category.index')->with('success', 'Danh mục đã được thêm thành công');
         }
         catch(\Exception $e){
             DB::rollBack();
