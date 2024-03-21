@@ -7,7 +7,9 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
 class ProductController extends Controller
 {
     public function index()
@@ -104,4 +106,15 @@ class ProductController extends Controller
             DB::rollback();
         }
     }
+
+    public function export()
+    {
+        return Excel::download(new ProductExport, 'products.csv');
+    }
+
+    public function import(Request $request){
+        Excel::import(new ProductImport, $request->csv_file);
+        return redirect()->route('product.index')->with('success', 'Sản phẩm đã được nhập thành công');
+    }
+
 }

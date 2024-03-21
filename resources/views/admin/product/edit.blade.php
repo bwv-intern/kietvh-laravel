@@ -5,6 +5,16 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success my-1">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('errors'))
+        <div class="alert alert-danger my-1">
+            {{ session('errors') }}
+        </div>
+    @endif
     <div class="card card-primary card-outline">
         <div class="card-body">
             <h5 class="text-center">Sửa Sản Phẩm</h5>
@@ -18,47 +28,42 @@
                         <div class="card-header">
                             <h3 class="card-title">Sửa Sản Phẩm </h3>
                         </div>
-
-                        @if (session('success'))
-                            <div class="alert alert-success my-1">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        @if (session('errors'))
-                            <div class="alert alert-danger my-1">
-                                {{ session('errors') }}
-                            </div>
-                        @endif
                         <form action="/admin/product/edit" id="productForm" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="productName">Tên Sản Phẩm</label>
-                                    <input type="hidden" class="form-control" id="productName" name="productID" value="{{$product->id}}">
-                                    <input type="text" class="form-control" id="productName" name="productName" placeholder="Tên Sản Phẩm" value="{{$product->name}}">
+                                    <input type="hidden" class="form-control" id="productName" name="productID"
+                                        value="{{ $product->id }}">
+                                    <input type="text" class="form-control" id="productName" name="productName"
+                                        placeholder="Tên Sản Phẩm" value="{{ $product->name }}">
                                     <span id="productNameError" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label>Loại</label>
                                     <select class="form-control" name="category_id">
-                                        @foreach($categories as $key)
-                                            <option {{$key -> id == $product -> id_category ? "selected" : ""}} value="{{$key -> id}} ">{{$key -> name}}</option>
+                                        @foreach ($categories as $key)
+                                            <option {{ $key->id == $product->id_category ? 'selected' : '' }}
+                                                value="{{ $key->id }} ">{{ $key->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="productPrice">Giá Sản Phẩm</label>
-                                    <input type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Giá Sản Phẩm" value="{{$product ->price}}">
+                                    <input type="number" class="form-control" id="productPrice" name="productPrice"
+                                        placeholder="Giá Sản Phẩm" value="{{ $product->price }}">
                                     <span id="productPriceError" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="productQuantity">Số lượng</label>
-                                    <input type="number" class="form-control" id="productQuantity" name="productQuantity" placeholder="Số lượng" value="{{$product ->quantity}}">
+                                    <input type="number" class="form-control" id="productQuantity" name="productQuantity"
+                                        placeholder="Số lượng" value="{{ $product->quantity }}">
                                     <span id="productQuantityError" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="productDescription">Mô Tả Sản Phẩm</label>
-                                    <textarea class="form-control" id="productDescription" name="productDescription" rows="3" placeholder="Mô Tả Sản Phẩm">{{$product ->description}}</textarea>
+                                    <textarea class="form-control" id="productDescription" name="productDescription" rows="3"
+                                        placeholder="Mô Tả Sản Phẩm">{{ $product->description }}</textarea>
                                     <span id="productDescriptionError" class="text-danger"></span>
                                 </div>
                             </div>

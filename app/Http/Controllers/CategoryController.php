@@ -6,12 +6,14 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\CategoriesImport;
+use App\Exports\CategoryExport;
 class CategoryController extends Controller
 {
     public function index(){
 
-        $categories = Category::simplePaginate(1);
+        $categories = Category::simplePaginate(5);
         return view('admin.category.index',compact('categories'));
 
     }
@@ -81,7 +83,17 @@ class CategoryController extends Controller
             return redirect()->route('category.index')->with('success', 'Danh mục đã được xóa thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('category.index')->with('error', 'Đã xảy ra lỗi khi xóa Danh mục');
+            return redirect()->route('category.index')->with('errors', 'Đã xảy ra lỗi khi xóa Danh mục');
         }
+    }
+
+    public function import(Request $request){
+        Excel::import(new CategoriesImport, $request->csv_file);
+        return redirect()->route('category.index')->with('success', 'Danh mục đã được nhập thành công');
+    }
+
+    public function export()
+    {
+        return Excel::download(new CategoryExport, 'categories.csv');
     }
 }
