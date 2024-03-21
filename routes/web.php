@@ -54,3 +54,8 @@ Route::post('/validation',[ValiadateExampleController::class,'validateServerSide
 
 // Route Transaction Issue 126183
 Route::post('/transaction',[ExTransactionController::class],'store');
+
+// Route Lodas Issue 126184
+Route::get('/lodash', function () {
+    return view('client.lodash');
+});
