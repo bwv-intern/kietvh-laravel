@@ -25,12 +25,12 @@ class ExTransactionController extends Controller
 
             // Commit transaction
             DB::commit();
+            return "Insert element to database transaction successfully";
         }
         catch(\Exception $ex){
-            $request->session()->flash('errors', $ex);
-
             // roolback transaction when have errors
             DB::rollback();
+            return "Error occurred";
         }
 
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ValiadateExampleController;
+use App\Http\Controllers\ExTransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 // Route Validate Issue 126182
 Route::get('/validation',[ValiadateExampleController::class,'index']);
 Route::post('/validation',[ValiadateExampleController::class,'validateServerSide']);
+
+// Route Transaction Issue 126183
+Route::post('/transaction',[ExTransactionController::class],'store');

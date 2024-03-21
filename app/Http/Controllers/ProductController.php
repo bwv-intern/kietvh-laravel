@@ -19,15 +19,25 @@ class ProductController extends Controller
 
     public function add(Request $request)
     {
-        $product = new Product();
-        $product->name = $request->input('productName');
-        $product->price = $request->input('productPrice');
-        $product->id_category = $request->category_id;
-        $product->quantity = $request->productQuantity;
-        $product->description = $request->input('productDescription');
-        $product->save();
+        DB::beginTransaction();
+        try{
 
-        return redirect()->route('product.index')->with('success', 'Thêm sản phẩm thành công!');
+            $product = new Product();
+            $product->name = $request->input('productName');
+            $product->price = $request->input('productPrice');
+            $product->id_category = $request->category_id;
+            $product->quantity = $request->productQuantity;
+            $product->description = $request->input('productDescription');
+            $product->save();
+
+            DB::commit();
+
+            return redirect()->route('product.index')->with('success', 'Thêm sản phẩm thành công!');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->route('product.index')->with('error', 'Thêm sản phẩm thất bại!');
+        }
     }
 
     public function getAdd()
@@ -45,35 +55,53 @@ class ProductController extends Controller
 
     public function edit(ProductRequest $request)
     {
-        $productId = $request->input('productID');
-        $productName = $request->input('productName');
-        $categoryId = $request->input('category_id');
-        $productPrice = $request->input('productPrice');
-        $productQuantity = $request->input('productQuantity');
-        $productDescription = $request->input('productDescription');
 
-        $product = Product::findOrFail($productId);
+        DB::beginTransaction();
+        try{
+            $productId = $request->input('productID');
+            $productName = $request->input('productName');
+            $categoryId = $request->input('category_id');
+            $productPrice = $request->input('productPrice');
+            $productQuantity = $request->input('productQuantity');
+            $productDescription = $request->input('productDescription');
 
-        $product->name = $productName;
-        $product->id_category = $categoryId;
-        $product->price = $productPrice;
-        $product->quantity = $productQuantity;
-        $product->description = $productDescription;
+            $product = Product::findOrFail($productId);
 
-        $product->save();
+            $product->name = $productName;
+            $product->id_category = $categoryId;
+            $product->price = $productPrice;
+            $product->quantity = $productQuantity;
+            $product->description = $productDescription;
 
-        return redirect()->route('product.gedit', ['id' => $productId])->with('success', 'sản phẩm đã được cập nhật thành công');
+            $product->save();
+
+            DB::commit();
+
+            return redirect()->route('product.gedit', ['id' => $productId])->with('success', 'sản phẩm đã được cập nhật thành công');
+
+        }
+        catch(\Exeception $e){
+            return redirect()->route('product.index')->with('error', 'Cập nhật sản phẩm thất bại!');
+        }
     }
     public function delete($id)
     {
-        $product = Product::find($id);
+        DB::beginTransaction();
+        try{
+            $product = Product::find($id);
 
-        if (!$product) {
-            return redirect()->back()->with('error', 'Không tìm thấy sản phẩm để xóa.');
+            if (!$product) {
+                return redirect()->back()->with('error', 'Không tìm thấy sản phẩm để xóa.');
+            }
+
+            $product->delete();
+
+            DB::commit();
+
+            return redirect()->route('product.index')->with('success', 'Sản phẩm đã được xóa thành công.');
         }
-
-        $product->delete();
-
-        return redirect()->route('product.index')->with('success', 'Sản phẩm đã được xóa thành công.');
+        catch(\Exception $e){
+            DB::rollback();
+        }
     }
 }
