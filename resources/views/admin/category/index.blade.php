@@ -10,10 +10,17 @@
             {{ session('success') }}
         </div>
     @endif
-    @if (session('errors'))
+    @if (session('error'))
         <div class="alert alert-danger my-1">
             {{ session('errors') }}
         </div>
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger my-1">
+                {{ $error }}
+            </div>
+        @endforeach
     @endif
     <div class="card card-primary card-outline">
         <div class="card-body">
@@ -82,7 +89,8 @@
                             <label for="formFile" class="form-label">Choose CSV File</label>
                             <input class="form-control" type="file" id="formFile" name="csv_file">
                         </div>
-                        <div class="d-flex justify-content-end"><button type="submit" class="btn btn-primary">Upload</button></div>
+                        <div class="d-flex justify-content-end"><button type="submit"
+                                class="btn btn-primary">Upload</button></div>
                     </form>
                 </div>
             </div>

@@ -10,10 +10,17 @@
             {{ session('success') }}
         </div>
     @endif
-    @if (session('errors'))
+    @if (session('error'))
         <div class="alert alert-danger my-1">
             {{ session('errors') }}
         </div>
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger my-1">
+                {{ $error }}
+            </div>
+        @endforeach
     @endif
     <div class="card card-primary card-outline">
         <div class="card-body">
@@ -116,6 +123,7 @@
                 return false;
             }
 
+            showOverlay(true);
 
             // Gửi form nếu đã kiểm tra xong
             this.submit();

@@ -20,7 +20,7 @@ class ProductController extends Controller
     }
 
 
-    public function add(Request $request)
+    public function add(ProductRequest $request)
     {
         DB::beginTransaction();
         try{
