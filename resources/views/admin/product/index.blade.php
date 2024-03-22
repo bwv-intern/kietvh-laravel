@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('title')
-    <title>Admin | Danh Mục</title>
+    <title>Admin | Sản phẩm</title>
 @endsection
 
 @section('content')
