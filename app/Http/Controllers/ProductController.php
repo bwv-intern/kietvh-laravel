@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductExport;
 use App\Imports\ProductImport;
+use Barryvdh\Debugbar\Facade as Debugbar;
 class ProductController extends Controller
 {
     public function index()
@@ -23,11 +24,14 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
         try{
-
+            $idCategory = $request->category_id;
+            if(!Category::find($idCategory)){
+                return redirect()->route('product.index')->with('error', 'Thêm sản phẩm thất bại! Không tìm thấy danh mục');
+            }
             $product = new Product();
             $product->name = $request->input('productName');
             $product->price = $request->input('productPrice');
-            $product->id_category = $request->category_id;
+            $product->id_category = $idCategory;
             $product->quantity = $request->productQuantity;
             $product->description = $request->input('productDescription');
             $product->save();
@@ -51,6 +55,11 @@ class ProductController extends Controller
     public function getEdit($id)
     {
         $product = Product::find($id);
+        if(!$product){
+            Debugbar::error("Product not found");
+            return redirect()->route('product.index')->with('errors', 'Không tìm thấy sản phẩm');
+        }
+        Debugbar::info( $product );
         $categories = Category::all();
         return view('admin.product.edit', compact('product', 'categories'));
     }
@@ -68,6 +77,13 @@ class ProductController extends Controller
             $productDescription = $request->input('productDescription');
 
             $product = Product::findOrFail($productId);
+
+            if(!$product){
+                return redirect()->route('product.index')->with('errors', 'Không tìm thấy sản phẩm');
+            }
+            if(!Category::find($categoryId)){
+                return redirect()->route('product.index')->with('errors', 'Không tìm thấy danh mục');
+            }
 
             $product->name = $productName;
             $product->id_category = $categoryId;

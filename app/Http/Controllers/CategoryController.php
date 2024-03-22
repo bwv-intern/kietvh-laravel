@@ -33,6 +33,10 @@ class CategoryController extends Controller
 
             $category = Category::findOrFail($idCategory);
 
+            if(!$category){
+                return redirect()->route('category.index')->with('errors', 'Đã xảy ra lỗi khi sửa Danh mục - Không tìm thấy danh mục');
+            }
+
             $category->name = $nameCategory;
             $category->save();
 
@@ -75,6 +79,10 @@ class CategoryController extends Controller
         try {
 
             $category = Category::findOrFail($id);
+
+            if(!$category){
+                return redirect()->route('category.index')->with('errors', 'Đã xảy ra lỗi khi xóa Danh mục - Không tìm thấy danh mục');
+            }
 
             $category->delete();
 
