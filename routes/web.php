@@ -23,7 +23,8 @@ use App\Http\Controllers\ExTransactionController;
 Route::get('/auth/login',  [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login',  [AuthController::class, 'doLogin']);
 Route::get('/auth/logout',[AuthController::class, 'doLogOut'])->name('logOut');
-
+Route::get('/auth/register',[AuthController::class, 'register'] )->name('register');
+Route::post('/auth/register',[AuthController::class, 'doRegister'] )->name('doRegister');
 // Route Admin
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/',  [AdminController::class, 'index'])->name('index');
