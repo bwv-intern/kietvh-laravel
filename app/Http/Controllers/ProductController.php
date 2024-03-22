@@ -26,7 +26,7 @@ class ProductController extends Controller
         try{
             $idCategory = $request->category_id;
             if(!Category::find($idCategory)){
-                return redirect()->route('product.index')->with('error', 'Thêm sản phẩm thất bại! Không tìm thấy danh mục');
+                return redirect()->route('product.index')->with('errors', 'Thêm sản phẩm thất bại! Không tìm thấy danh mục');
             }
             $product = new Product();
             $product->name = $request->input('productName');
@@ -42,7 +42,7 @@ class ProductController extends Controller
         }
         catch(\Exception $e){
             DB::rollBack();
-            return redirect()->route('product.index')->with('error', 'Thêm sản phẩm thất bại!');
+            return redirect()->route('product.index')->with('errors', 'Thêm sản phẩm thất bại!');
         }
     }
 
@@ -99,7 +99,7 @@ class ProductController extends Controller
 
         }
         catch(\Exeception $e){
-            return redirect()->route('product.index')->with('error', 'Cập nhật sản phẩm thất bại!');
+            return redirect()->route('product.index')->with('errors', 'Cập nhật sản phẩm thất bại!');
         }
     }
     public function delete($id)
