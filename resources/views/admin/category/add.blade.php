@@ -10,18 +10,13 @@
             {{ session('success') }}
         </div>
     @endif
-    @if (session('error'))
+    @if (session('errors'))
         <div class="alert alert-danger my-1">
             {{ session('errors') }}
         </div>
     @endif
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger my-1">
-                {{ $error }}
-            </div>
-        @endforeach
-    @endif
+
+
     <div class="card card-primary card-outline">
         <div class="card-body">
             <h5 class="text-center">Danh Mục</h5>
@@ -34,7 +29,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Thêm danh mục mới</h3>
                         </div>
-                        <form action = "/admin/category/add" id ="categoryForm" method="POST">
+                        <form action = "/admin/category/confirm" id ="categoryForm" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -45,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Thêm</button>
+                                <button type="submit" id="submitButton" class="btn btn-primary">Thêm</button>
                             </div>
                         </form>
                     </div>
@@ -59,15 +54,19 @@
 
             var nameCategory = document.getElementById('nameCategory').value.trim();
             var nameCategoryError = document.getElementById('nameCategoryError');
+            var buttonSubmit = document.getElementById('submitButton');
 
             if (nameCategory === '') {
                 nameCategoryError.textContent = 'Vui lòng nhập tên danh mục.';
                 return false;
             }
 
+            buttonSubmit.disabled = true;
+
             showOverlay(true);
 
             this.submit();
+
         });
     </script>
 @endsection

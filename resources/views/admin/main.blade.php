@@ -73,6 +73,15 @@
     <script src="admin_lte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="admin_lte/dist/js/adminlte.min.js"></script>
+    <script>
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                showOverlay(false);
+                var submitButton = document.getElementById("submitButton");
+                submitButton.disabled = false;
+            }
+        });
+    </script>
 </body>
 
 </html>

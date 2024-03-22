@@ -10,18 +10,13 @@
             {{ session('success') }}
         </div>
     @endif
-    @if (session('error'))
+
+    @if (session('errors'))
         <div class="alert alert-danger my-1">
             {{ session('errors') }}
         </div>
     @endif
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger my-1">
-                {{ $error }}
-            </div>
-        @endforeach
-    @endif
+
     <div class="card card-primary card-outline">
         <div class="card-body">
             <h5 class="text-center">Sản phẩm</h5>
@@ -60,8 +55,8 @@
                                 <th scope="row">{{ $item->id }}</th>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->category->name }}</td>
-                                <td>{{ $item->name }}</td>
                                 <td>{{ number_format($item->price, 2) }}</td>
+                                <td>{{ $item->quantity }}</td>
                                 <td>{{ Str::of($item->description)->limit(20) }}</td>
                                 <td>
                                     <button class="btn btn-warning" onclick="editById({{ $item->id }})">Edit</button>

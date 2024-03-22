@@ -10,18 +10,13 @@
             {{ session('success') }}
         </div>
     @endif
-    @if (session('error'))
+
+    @if (session('errors'))
         <div class="alert alert-danger my-1">
             {{ session('errors') }}
         </div>
     @endif
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger my-1">
-                {{ $error }}
-            </div>
-        @endforeach
-    @endif
+
     <div class="card card-primary card-outline">
         <div class="card-body">
             <h5 class="text-center">Thêm Sản Phẩm</h5>
@@ -72,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Thêm</button>
+                                <button type="submit" id="submitButton" class="btn btn-primary">Thêm</button>
                             </div>
                         </form>
                     </div>
@@ -91,7 +86,7 @@
             var productNameError = document.getElementById('productNameError');
             var productPriceError = document.getElementById('productPriceError');
             var productDescriptionError = document.getElementById('productDescriptionError');
-
+            var submitButton = document.getElementById('submitButton');
 
             // Kiểm tra kiểu dữ liệu và các điều kiện khác
             if (productName === '') {
@@ -119,6 +114,8 @@
                 productDescriptionError.textContent = 'Mô tả sản phẩm không được vượt quá 255 ký tự.';
                 return false;
             }
+
+            submitButton.disable = true;
 
             showOverlay(true);
 

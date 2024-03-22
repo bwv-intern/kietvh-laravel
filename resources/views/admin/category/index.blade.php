@@ -10,18 +10,18 @@
             {{ session('success') }}
         </div>
     @endif
-    @if (session('error'))
+    @if (session('errors'))
         <div class="alert alert-danger my-1">
             {{ session('errors') }}
         </div>
     @endif
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger my-1">
                 {{ $error }}
             </div>
         @endforeach
-    @endif
+    @endif --}}
     <div class="card card-primary card-outline">
         <div class="card-body">
             <h5 class="text-center">Danh Mục</h5>

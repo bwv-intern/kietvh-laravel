@@ -35,6 +35,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::get('/edit/{id}', [CategoryController::class, 'getEdit'])->name('category.gedit');
         Route::post('/edit/', [CategoryController::class, 'postEdit'])->name('category.edit');
         Route::get('/delete/{id}', [CategoryController::class, 'deleteByID']);
+        Route::post('/confirm', [CategoryController::class, 'confirm']);
 
         // Route Import-Export CSV Issue 126184
         Route::post('/import', [CategoryController::class, 'import'])->name('category.import');
@@ -68,4 +69,9 @@ Route::post('/transaction',[ExTransactionController::class],'store');
 // Route Lodas Issue 126184
 Route::get('/lodash', function () {
     return view('client.lodash');
+});
+
+Route::get('/hienthi',function () {
+
+    return view('client.hienthi')->with(['data'=>'ABCD <br> <br><br><br><br><br>ABCD <br> ABCD']);
 });
